@@ -1,0 +1,33 @@
+.stack{
+  display: flex;
+  flex-direction: column;  
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10%;  
+}
+
+.space {
+  height: 20px;
+  width: 100%;
+}
+
+.thin {
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic
+}
+
