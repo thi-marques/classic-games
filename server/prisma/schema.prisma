@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id        Int           @id @default(autoincrement())
+  name      String
+  scores    PlayerScore[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Game {
+  id         Int     @id @default(autoincrement())
+  name       String
+  descrition String
+  howToPlay  String
+  maxPlayers Int
+  Match      Match[]
+}
+
+model PlayerScore {
+  id        Int      @id @default(autoincrement())
+  score     Int
+  Player    Player   @relation(fields: [playerId], references: [id])
+  playerId  Int      @unique
+  Match     Match    @relation(fields: [matchId], references: [id])
+  matchId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Match {
+  id     Int           @id @default(autoincrement())
+  scores PlayerScore[]
+  game   Game          @relation(fields: [gameId], references: [id])
+  gameId Int
+}
