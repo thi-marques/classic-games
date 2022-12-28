@@ -15,9 +15,6 @@ export default defineConfig({
   ],
   test: {
     environment: 'node',
-    exclude: [
-      ...configDefaults.exclude,
-      '**/e2e/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-    ],
+    exclude: [...configDefaults.exclude, '**/e2e/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
   },
 })
