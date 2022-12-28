@@ -9,7 +9,7 @@ export class Match implements MatchDB {
   id!: number
 
   @Field(type => Int)
-  gameId!: number
+  gameId!: string
 
   @Field(type => Game)
   game!: Game
@@ -24,5 +24,5 @@ export class MatchCreate implements Omit<Match, 'id' | 'scores' | 'game'> {
   id!: number
 
   @Field(type => Int)
-  gameId!: number
+  gameId!: string
 }

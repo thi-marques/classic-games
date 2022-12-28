@@ -10,7 +10,7 @@ export class Score implements ScoreDB {
   score!: number
 
   @Field(type => Int)
-  playerId!: number
+  playerId!: string
 
   @Field(type => Int)
   matchId!: number
@@ -28,7 +28,7 @@ export class ScoreCreate implements Omit<Score, 'id' | 'createdAt' | 'updatedAt'
   score!: number
 
   @Field(type => Int)
-  playerId!: number
+  playerId!: string
 
   @Field(type => Int)
   matchId!: number

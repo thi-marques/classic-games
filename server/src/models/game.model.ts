@@ -5,7 +5,7 @@ import { Match } from './match.model'
 @ObjectType()
 export class Game implements GameDB {
   @Field(type => ID)
-  id!: number
+  id!: string
 
   @Field()
   title!: string

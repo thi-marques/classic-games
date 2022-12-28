@@ -15,7 +15,7 @@ datasource db {
 }
 
 model PlayerDB {
-  id        Int       @id @default(autoincrement())
+  id        String       @id @default(uuid())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -25,7 +25,7 @@ model PlayerDB {
 }
 
 model GameDB {
-  id          Int       @id @default(autoincrement())
+  id          String       @id @default(uuid())
   title       String
   description String?
   howToPlay   String?
@@ -37,7 +37,7 @@ model GameDB {
 
 model MatchDB {
   id     Int       @id @default(autoincrement())
-  gameId Int
+  gameId String
   game   GameDB    @relation(fields: [gameId], references: [id])
   scores ScoreDB[]
 
@@ -47,7 +47,7 @@ model MatchDB {
 model ScoreDB {
   id        Int      @id @default(autoincrement())
   score     Int
-  playerId  Int
+  playerId  String
   matchId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
