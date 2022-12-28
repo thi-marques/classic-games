@@ -2,42 +2,57 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider          = "node node_modules/prisma-nestjs-graphql"
+  output            = "./nestgraphql"
+  outputFilePattern = "{model}/{type}/{name}.ts"
+  purgeOutput       = true
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Player {
-  id        Int           @id @default(autoincrement())
+model PlayerDB {
+  id        Int       @id @default(autoincrement())
   name      String
-  scores    PlayerScore[]
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  scores    ScoreDB[]
+
+  @@map("Player")
 }
 
-model Game {
-  id         Int     @id @default(autoincrement())
-  name       String
-  descrition String
-  howToPlay  String
-  maxPlayers Int
-  Match      Match[]
+model GameDB {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  howToPlay   String?
+  maxPlayers  Int?
+  matches     MatchDB[]
+
+  @@map("Game")
 }
 
-model PlayerScore {
+model MatchDB {
+  id     Int       @id @default(autoincrement())
+  gameId Int
+  game   GameDB    @relation(fields: [gameId], references: [id])
+  scores ScoreDB[]
+
+  @@map("Match")
+}
+
+model ScoreDB {
   id        Int      @id @default(autoincrement())
   score     Int
-  Player    Player   @relation(fields: [playerId], references: [id])
-  playerId  Int      @unique
-  Match     Match    @relation(fields: [matchId], references: [id])
+  playerId  Int
   matchId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
+  player    PlayerDB @relation(fields: [playerId], references: [id])
+  match     MatchDB  @relation(fields: [matchId], references: [id])
 
-model Match {
-  id     Int           @id @default(autoincrement())
-  scores PlayerScore[]
-  game   Game          @relation(fields: [gameId], references: [id])
-  gameId Int
+  @@map("Score")
 }

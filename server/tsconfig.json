@@ -15,6 +15,7 @@
         "src/*"
       ]
     },
+    "strict": true,
     "typeRoots": ["src/@types"],
     "incremental": true,
     "skipLibCheck": true

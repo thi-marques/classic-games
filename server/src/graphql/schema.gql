@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Game {
+  description: String
+  howToPlay: String
+  id: ID!
+  matches: [Match!]!
+  maxPlayers: Int
+  title: String!
+}
+
+input GameCreateInput {
+  description: String
+  howToPlay: String
+  maxPlayers: Int
+  title: String!
+}
+
+type Match {
+  game: Game!
+  gameId: Int!
+  id: ID!
+  scores: [Score!]!
+}
+
+type Mutation {
+  createGame(game: GameCreateInput!): Game!
+  createPlayer(player: PlayerCreateInput!): Player!
+}
+
+type Player {
+  createdAt: DateTime!
+  id: ID!
+  matches: [Match!]!
+
+  """Player's full name"""
+  name: String!
+  updatedAt: DateTime!
+}
+
+input PlayerCreateInput {
+  name: String!
+}
+
+type Query {
+  games: [Game!]!
+  players: [Player!]!
+}
+
+type Score {
+  createdAt: DateTime!
+  id: ID!
+  matchId: Int!
+  playerId: Int!
+  score: Int!
+  updatedAt: DateTime!
+}
