@@ -49,9 +49,18 @@ input PlayerCreateInput {
   name: String!
 }
 
+input PlayerQueryInput {
+  createdAt: DateTime
+  id: ID
+
+  """Player's full name"""
+  name: String
+  updatedAt: DateTime
+}
+
 type Query {
   games: [Game!]!
-  players: [Player!]!
+  players(player: PlayerQueryInput): [Player!]!
 }
 
 type Score {

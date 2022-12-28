@@ -20,6 +20,21 @@ export class Player implements PlayerDB {
   matches!: Match[]
 }
 
+@InputType()
+export class PlayerQueryInput implements Partial<Player> {
+  @Field(type => ID, { nullable: true })
+  id?: string
+
+  @Field({ description: `Player's full name`, nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
+  createdAt?: Date
+
+  @Field({ nullable: true })
+  updatedAt?: Date
+}
+
 type PlayerCreate = Omit<Player, 'id' | 'createdAt' | 'updatedAt' | 'matches'>
 
 @InputType()
